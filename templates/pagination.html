@@ -1,0 +1,26 @@
+<!-- we need to make the magination dynamic for all pages and sections like for project page or for developers page thats why we insted of  if projects.has_other_pages we r replacing name projects by queryset bcz project was used for project page pagination-->
+
+{% if queryset.has_other_pages %}
+<div class="pagination">
+  <ul class="container">
+
+    {% if queryset.has_previous %}
+    <l1><a href="?page={{queryset.previous_page_number}}" class="btn page-link" data-page="{{queryset.previous_page_number}}">&#10094; Prev</a></l1>
+    {% endif %}
+
+    {% for page in custom_range %}
+
+    {% if page == queryset.number %}
+    <l1><a href="?page={{page}}" class="btn page-link btn--sub" data-page="{{page}}">{{page}}</a></l1> <!-- ths is done to highlight the button of current page we r-->
+    {% else %}
+    <l1><a href="?page={{page}}" class="btn page-link" data-page="{{page}}">{{page}}</a></l1>
+    {% endif %}
+    
+    {% endfor %}
+
+    {% if queryset.has_next %}
+    <l1><a href="?page={{queryset.next_page_number}}" class="btn page-link" data-page="{{queryset.next_page_number}}">Next &#10095;</a></l1>
+    {% endif %}
+  </ul>
+</div>
+{% endif %}
